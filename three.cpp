@@ -1,6 +1,7 @@
-#include"Three.h"
+#include"Three.hpp"
 
 int main(){
-    Three t(1, 2 ,3);
-    t.max_min();
+    Three* t = new Three(1, 2 ,3);
+    t->max_min();
+    delete t;
 }
