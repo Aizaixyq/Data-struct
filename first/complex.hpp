@@ -1,3 +1,5 @@
+#ifndef COMPLEX_HPP
+#define COMPLEX_HPP
 #include<iostream>
 #include<math.h>
 
@@ -20,3 +22,4 @@ struct complex{
         return c;
     }
 };
+#endif

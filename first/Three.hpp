@@ -1,3 +1,5 @@
+#ifndef THREE_HPP
+#define THREE_HPP
 #include<iostream>
 #include<math.h>
 
@@ -11,3 +13,4 @@ struct Three{
         std::cout<<"Min: "<<std::min(std::min(one, two), three);
     }
 };
+#endif
