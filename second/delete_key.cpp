@@ -38,22 +38,30 @@ void List_input(List *node){
     }
 }
 
-void delete_key(Node *&L, int key){
-    Node *r, *a = new Node;
-    //C:Node *r = (Node*)malloc(sizeof(Node));
+int delete_key(Node *&L, int key){
+    Node *r = new Node;
+    Node *a = nullptr;
     r = L;
+    int sum = 0;
     while(r){
+        Node *q = r;
         if(r->val == key){
+            sum++;
             if(!a){
                 L = L->next;
+                r = r->next;
             }
             else{
                 a->next = r->next;
+                r = r->next;
             }
+            delete q;
+            continue;
         }
         a = r;
         r = r->next;
     }
+    return sum;
 }
 
 int main(){
@@ -67,6 +75,6 @@ int main(){
     cout<<"Enter over"<<endl;//尾插法
     List_input(head);//输出链表
 
-    delete_key(head, 2);//删除
+    head->val -= delete_key(head->next, 2);//删除并修改长度
     List_input(head);//输出链表
 }
