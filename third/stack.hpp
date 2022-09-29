@@ -1,7 +1,6 @@
 #ifndef STACK_H
 #define STACK_H
 #include<iostream>
-using std::cout;
 
 template<class T>class stack{
 private:
@@ -48,7 +47,7 @@ public:
     void print(){
         int q = ptr;
         while(q > -1){
-            cout<<val[q];
+            std::cout<<val[q];
             --q;
         }
     }
