@@ -10,7 +10,6 @@ struct List{
     List(int val): val(val), next(nullptr){}
     List(int val, List *next): val(val), next(next){}
 };
-using Node=List;
 
 List* end_insertion(List* node, int len){
     if(len <= 0){
@@ -38,13 +37,13 @@ void List_input(List *node){
     }
 }
 
-int delete_key(Node *&L, int key){
-    Node *r = new Node;
-    Node *a = nullptr;
+int delete_key(List *&L, int key){
+    List *r = new List;
+    List *a = nullptr;
     r = L;
     int sum = 0;
     while(r){
-        Node *q = r;
+        List *q = r;
         if(r->val == key){
             sum++;
             if(!a){
