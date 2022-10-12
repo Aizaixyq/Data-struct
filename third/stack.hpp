@@ -1,18 +1,20 @@
+#include<iostream>
+#include<vector>
 #ifndef STACK_H
 #define STACK_H
-#include<iostream>
 
 template<class T>class stack{
 private:
-    T val[20];
+    std::vector<T> vals;
     int ptr = -1;
       
 public:
     bool push(T v){
-        if(ptr >= 20){
-            return false;
-        }
-        val[++ptr] = v;
+        //if(ptr >= 20){
+            vals.emplace_back(v);
+        //}
+        //vals[++ptr] = v;
+        ++ptr;
         return true;
     }
       
@@ -41,13 +43,13 @@ public:
         if(ptr == -1){
             return 0;
         }
-        return val[ptr];
+        return vals[ptr];
     }
       
     void print(){
         int q = ptr;
         while(q > -1){
-            std::cout<<val[q];
+            std::cout<<vals[q];
             --q;
         }
     }
