@@ -13,7 +13,7 @@ private:
     void flash_vessel(int len){
         char *p = a;
         char *re = new char[_cap + len];
-        memcpy(re, a, _cap);
+        memcpy(re, a, _len);
         a = re;
         delete []p;
         _cap += len;
