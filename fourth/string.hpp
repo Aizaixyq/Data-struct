@@ -8,15 +8,15 @@ private:
     char *a;
     size_t _cap;//容量
     size_t _len;//当前字符串长度
-
+    
     //对字符串内存进行扩大
-    void flash_vessel(int len){
+    void flash_vessel(int klen){
         char *p = a;
-        char *re = new char[_cap + len];
+        char *re = new char[_cap + klen];
         memcpy(re, a, _len);
         a = re;
         delete []p;
-        _cap += len;
+        _cap += klen;
     }
 
 public:
@@ -25,7 +25,14 @@ public:
         _cap = 20;
         a = new char[_cap];
     }
-    string(const char *x){
+    string(const char x){
+        _len = 0;
+        _cap = 20;
+        a = new char[_cap];
+        *this = x;
+    }
+    template<size_t len>
+    string(const char(&x)[len]){
         _len = 0;
         _cap = 20;
         a = new char[_cap];
@@ -43,6 +50,8 @@ public:
             --i;
         }
     }
+
+
     //返回字符串长度
     size_t size(){
         return _len;
@@ -54,6 +63,38 @@ public:
         }
     }
 
+    //连接操作
+    string operator + (const char x){
+        string re = *this;
+        re.a[re._len] = x;
+        if(re._len >= re._cap - 2){
+            re.flash_vessel(5);
+        }
+        re.a[++re._len] = '\0';
+        return re;
+    }
+    //连接操作
+    template<size_t len>
+    string operator + (const char(&x)[len]){
+        string re = *this;
+        if(x == NULL){
+            return re;
+        }
+        int n = len;
+        int i = 0;
+        if(re._len + n >= re._cap - 1){
+            re.flash_vessel(re._len + n + 1 - re._cap);
+        }
+        while(1){
+            re.a[re._len] = x[i];
+            if(re.a[re._len] == '\0'){
+                break;
+            }
+            ++re._len;
+            ++i;
+        }
+        return re;
+    }
     //连接操作
     string operator + (const string &x){
         string re = *this;
@@ -70,79 +111,64 @@ public:
         }
         return re;
     }
-    //连接操作
-    void operator += (const string &x){
-        size_t n = x._len;
-        if(this->_len + n >= this->_cap - 1){
-            this->flash_vessel(this->_len + n + 1 - this->_cap);
-        }
-        for(size_t i = 0; i < n; ++i){
-            this->a[this->_len] = x.a[i];
-            if(this->a[this->_len] == '\0'){
-                break;
-            }
-            ++this->_len;
-        }
-    }
-    //连接操作
-    string operator + (const char x){
-        string re = *this;
-        re.a[re._len] = x;
-        if(re._len >= re._cap - 2){
-            re.flash_vessel(5);
-        }
-        re.a[++re._len] = '\0';
-        return re;
-    }
+
+
     //连接操作
     void operator += (const char x){
-        this->a[this->_len] = x;
-        if(this->_len >= this->_cap - 2){
-            this->flash_vessel(5);
-        }
-        this->a[++this->_len] = '\0';
+        *this = this->operator+(x);
         return ;
     }
-
+    //连接操作
+    template<size_t len>
+    void operator += (const char(&x)[len]){
+        *this = this->operator+(x);
+        return ;
+    }
+    //连接操作
+    void operator += (const string &x){
+        *this = this->operator+(x);
+        return ;
+    }
+    
 
     //赋值or初始化操作
-    void operator = (const char *x){
-        if(x == NULL){
-            return ;
-        }
-        int n = sizeof(x);
-        int i = 0;
-        if(this->_len + n >= this->_cap - 1){
-            this->flash_vessel(this->_len + n + 1 - this->_cap);
-        }
-        while(1){
-            this->a[_len] = x[i];
-            if(this->a[_len] == '\0'){
-                break;
-            }
-            ++this->_len;
-            ++i;
-        }
+    void operator = (const char x){
+        this->_len = 0;
+        this->a[0] = '\0';
+        this->operator+=(x);
+        return ;
+    }
+    //赋值or初始化操作
+    template<size_t len>
+    void operator = (const char(&x)[len]){
+        this->_len = 0;
+        this->a[0] = '\0';
+        this->operator+=(x);
+        return ;
     }
     //赋值or初始化操作
     void operator = (const string &x){
         this->a = x.a;
         this->_len = x._len;
         this->_cap = x._cap;
+        return ;
     }
+
+
     //使用下标返回字符串元素
-    char& operator [](int i){
+    char& operator [](const int i){
         if(i < 0){
             return this->a[this->_len + i];
         }
         return this->a[i];
     }
+
+
     //定义使用流输入
     friend std::istream & operator >> (std::istream &in, string &x);
     //定义使用流输出
     friend std::ostream & operator << (std::ostream &out, string &x);
 };
-
 
 std::istream & operator >> (std::istream &in, string &x){
     int c;
