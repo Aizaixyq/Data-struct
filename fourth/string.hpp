@@ -8,12 +8,12 @@ private:
     char *a;
     size_t _cap;//容量
     size_t _len;//当前字符串长度
-    
+
     //对字符串内存进行扩大
     void flash_vessel(int klen){
         char *p = a;
         char *re = new char[_cap + klen];
-        memcpy(re, a, _len);
+        memcpy(re, a, _len + 1);
         a = re;
         delete []p;
         _cap += klen;
@@ -67,7 +67,7 @@ public:
     string operator + (const char x){
         string re = *this;
         re.a[re._len] = x;
-        if(re._len >= re._cap - 2){
+        if(re._len >= re._cap - 1){
             re.flash_vessel(5);
         }
         re.a[++re._len] = '\0';
@@ -82,8 +82,8 @@ public:
         }
         int n = len;
         int i = 0;
-        if(re._len + n >= re._cap - 1){
-            re.flash_vessel(re._len + n + 1 - re._cap);
+        if(re._len + n >= re._cap){
+            re.flash_vessel(re._len + n - re._cap);
         }
         while(1){
             re.a[re._len] = x[i];
@@ -99,8 +99,8 @@ public:
     string operator + (const string &x){
         string re = *this;
         size_t n = x._len;
-        if(re._len + n >= re._cap - 1){
-            re.flash_vessel(re._len + n + 1 - re._cap);
+        if(re._len + n >= re._cap){
+            re.flash_vessel(re._len + n - re._cap);
         }
         for(size_t i = 0; i < n; ++i){
             re.a[re._len] = x.a[i];

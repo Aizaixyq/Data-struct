@@ -5,11 +5,11 @@ using std::cout;
 using std::cin;
 
 int main(){
-    string a = "abc";
+    string a = "abc12345678901234567890";
     a[-1] = 'a';
     a += 'a';
     string b;
     cin>>b;
-    b += a; 
+    b += a;
     cout<<b;
 }
