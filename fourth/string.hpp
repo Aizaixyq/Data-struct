@@ -1,7 +1,7 @@
 #include<istream>
 #include<ostream>
 #ifndef STRING_H_O
-#define STRING_H_O
+#define STRING_H_O 1
 
 class string{
 private:
