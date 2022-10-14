@@ -1,7 +1,7 @@
-#ifndef THREE_HPP
-#define THREE_HPP
 #include<iostream>
 #include<math.h>
+#ifndef THREE_HPP
+#define THREE_HPP 1
 
 struct Three{
     int one, two, three;

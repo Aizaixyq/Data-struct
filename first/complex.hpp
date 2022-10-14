@@ -1,7 +1,7 @@
-#ifndef COMPLEX_HPP
-#define COMPLEX_HPP
 #include<iostream>
 #include<math.h>
+#ifndef COMPLEX_HPP
+#define COMPLEX_HPP 1
 
 struct complex{
     double real, imge;
