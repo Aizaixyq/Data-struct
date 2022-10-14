@@ -1,27 +1,25 @@
 #include<iostream>
 #ifndef STACK_H
-#define STACK_H
+#define STACK_H 1
 
 template<class T>class stack{
 private:
     T *vals;
-    size_t ptr;
-    size_t _M;
+    size_t _LEN;
+    size_t _CAP;
 
     //对数组内存进行扩大
     void flash_vessel(){
         T *p = vals;
-        T *re = new T[_M * 2];
-        for(int i = 0; i < _M; ++i){
-            re[i] = vals[i];
-        }
+        T *re = new T[_CAP * 2];
+        memcpy(re, vals, _CAP * sizeof(T));
         vals = re;
         delete []p;
-        _M *= 2;
+        _CAP *= 2;
     }
     //检查边界决定是否需要扩容
     bool end_check(){
-        if(this->ptr >= this->_M - 1){
+        if(this->_LEN >= this->_CAP - 1){
             this->flash_vessel();
             return true;
         }
@@ -30,35 +28,35 @@ private:
 
 public:
     stack(){
-        ptr = 0;
-        _M = 20;
-        vals = new T[_M];
+        _LEN = 0;
+        _CAP = 15;
+        vals = new T[_CAP];
     }
     stack(const stack &x){
-        ptr = x.ptr;
-        _M = x._M;
+        _LEN = x._LEN;
+        _CAP = x._CAP;
         vals = x.vals;
     }
     //元素入栈
     void push(T v){
-        vals[ptr] = v;
+        vals[_LEN] = v;
         end_check();
-        ++ptr;
+        ++_LEN;
     }
     //元素出栈
     void pop(){
-        if(ptr > 0){
-            --ptr;
+        if(_LEN > 0){
+            --_LEN;
             return ;
         }
     }
     //返回元素数量
     int size(){
-        return ptr;
+        return _LEN;
     }
     //判空
     bool empty(){
-        if(ptr > 0){
+        if(_LEN > 0){
             return false;
         }
         else{
@@ -67,14 +65,14 @@ public:
     }
     //获取顶部元素 
     int top(){
-        if(ptr <= 0){
+        if(_LEN <= 0){
             return 0;
         }
-        return vals[ptr - 1];
+        return vals[_LEN - 1];
     }
     //输出栈内全部元素
     void print(){
-        int q = ptr;
+        int q = _LEN;
         while(q > 0){
             std::cout<<vals[q - 1];
             --q;
