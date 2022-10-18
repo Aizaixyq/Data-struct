@@ -4,7 +4,7 @@
 using std::cout;
 using std::cin;
 
-int main(){
+void test(){
     string a = "abc1234567890123456";
     a[-1] = 'a';
     a += "av";
@@ -14,4 +14,13 @@ int main(){
     cout<<b<<std::endl;
     a = "acc";
     cout<<a;
+}
+
+int main(){
+    string a,b;
+    cin>>a>>b;
+    cout<<a<<std::endl;
+    cout<<b<<std::endl;
+    string c = a + b;
+    cout<<c;
 }
