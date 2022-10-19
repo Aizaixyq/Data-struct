@@ -5,5 +5,5 @@
 
 ## or 使用xmake构建系统构建：
 1. 安装xmake：https://github.com/xmake-io/xmake
-2. 在文件根目录下用终端输入xmake即可构建最新一次实验内容
+2. 在工程根目录下用终端输入xmake即可构建最新一次实验内容
 3. 再输入xmake run 运行最新一次实验的内容
