@@ -1,0 +1,5 @@
+target("fourth")
+    set_kind("binary")
+    set_languages("cxx17")
+    add_files("fourth/string.cpp")
+    add_includedirs("fourth")

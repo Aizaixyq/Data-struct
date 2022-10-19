@@ -1,5 +1,6 @@
 #include<istream>
 #include<ostream>
+#include<string.h>
 #ifndef STRING_H_O
 #define STRING_H_O 1
 
