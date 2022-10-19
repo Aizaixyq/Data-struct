@@ -1,3 +1,4 @@
 *.exe
-fourth/.vscode/.example-launch.txt
-fourth/.vscode/.example-tasks.txt
+/.out
+/build
+/.xmake

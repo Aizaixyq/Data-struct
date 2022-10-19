@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstring>
 #ifndef STACK_H
 #define STACK_H 1
 

@@ -1,26 +1,13 @@
 #include<istream>
 #include<ostream>
-#include<string.h>
+#include<cstring>
+#include"iter.hpp"
 #ifndef STRING_H_O
 #define STRING_H_O 1
 
 class string{
-private:
-    char *a;
-    size_t _CAP;//容量
-    size_t _LEN;//当前字符串长度
-
-    //对字符串内存进行扩大
-    void flash_vessel(int klen){
-        char *p = a;
-        char *re = new char[_CAP + klen];
-        memcpy(re, a, _LEN + 1);
-        a = re;
-        delete []p;
-        _CAP += klen;
-    }
-
 public:
+    typedef ::iter<char> iter;
     string(){
         _LEN = 0;
         _CAP = 20;
@@ -63,6 +50,16 @@ public:
             return true;
         }
     }
+
+    //返回begin迭代器
+    iter begin(){
+        return iter(a);
+    }
+    //返回end迭代器
+    iter end(){
+        return iter(a + _LEN);
+    }
+
 
     //连接操作
     string operator + (const char x){
@@ -171,6 +168,23 @@ public:
     friend std::istream & operator >> (std::istream &in, string &x);
     //定义使用流输出
     friend std::ostream & operator << (std::ostream &out, string &x);
+
+private:
+    char *a;
+    size_t _CAP;//容量
+    size_t _LEN;//当前字符串长度
+
+
+    //对字符串内存进行扩大
+    void flash_vessel(int klen){
+        char *p = a;
+        char *re = new char[_CAP + klen];
+        memcpy(re, a, _LEN + 1);
+        a = re;
+        delete []p;
+        _CAP += klen;
+    }
+
 };
 
 std::istream & operator >> (std::istream &in, string &x){
@@ -200,5 +214,11 @@ std::ostream & operator << (std::ostream &out, string &x){
         out<<x.a[i++];
     }
     return out;
+}
+
+void swap(char &a, char &b){
+    char t = a;
+    a = b;
+    b = t;
 }
 #endif
