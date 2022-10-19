@@ -10,7 +10,7 @@
                 "-std=c++17",
                 "${file}",
                 "-o",
-                "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe"
+                "${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"

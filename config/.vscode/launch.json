@@ -5,7 +5,7 @@
         "name": "运行C/C++: g++.exe build and debug active file",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
+        "program": "${fileBasenameNoExtension}.exe",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
