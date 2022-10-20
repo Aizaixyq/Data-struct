@@ -38,6 +38,9 @@ public:
             --i;
         }
     }
+    ~string(){
+        delete []a;
+    }
 
 
     //返回字符串长度
