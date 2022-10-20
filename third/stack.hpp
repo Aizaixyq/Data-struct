@@ -38,9 +38,9 @@ public:
         _CAP = x._CAP;
         vals = x.vals;
     }
-    ~stack(){
+    /*~stack(){
         delete []vals;
-    }
+    }*/
 
     //元素入栈
     void push(T v){

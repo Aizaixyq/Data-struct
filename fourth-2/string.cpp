@@ -23,7 +23,7 @@ void test3(string &x, char c){
     for(const auto &i : x){
         if(i != c)res += i;
     }
-    x =res;
+    x = res;
 }
 
 int main(){
