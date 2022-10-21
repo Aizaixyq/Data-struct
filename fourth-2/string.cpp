@@ -28,6 +28,7 @@ void test3(string &x, char c){
 
 int main(){
     string S = "12345abcdef";
+    cout<< S <<endl;
     test1(S, '1', '0');
     cout<<S<<endl;
     test2(S);

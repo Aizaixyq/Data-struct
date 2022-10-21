@@ -6,41 +6,34 @@
 #define STRING_H_O 1
 
 class string{
-public:
     typedef ::iter<char> iter;
+public:
     string(){
-        _LEN = 0;
-        _CAP = 20;
-        a = new char[_CAP];
+        init();
     }
     string(const char x){
-        _LEN = 0;
-        _CAP = 20;
-        a = new char[_CAP];
+        init();
         *this = x;
     }
     template<size_t len>
     string(const char(&x)[len]){
-        _LEN = 0;
-        _CAP = 20;
-        a = new char[_CAP];
+        init();
         *this = x;
     }
     string(const string &x){
+        init();
         *this = x;
     }
     string(int i, const char &x){
-        _LEN = 0;
-        _CAP = 20;
-        a = new char[_CAP];
+        init();
         while(i){
             *this += x;
             --i;
         }
     }
-    /*~string(){
+    ~string(){
         delete []a;
-    }*/
+    }
 
 
     //返回字符串长度
@@ -81,35 +74,26 @@ public:
         if(x == NULL){
             return re;
         }
-        int n = len;
-        int i = 0;
+        size_t n = len;
         if(re._LEN + n > re._CAP){
             re.flash_vessel(re._LEN + n - re._CAP);
         }
-        while(1){
-            re.a[re._LEN] = x[i];
-            if(re.a[re._LEN] == '\0'){
-                break;
-            }
-            ++re._LEN;
-            ++i;
-        }
+        memcpy(re.a + _LEN, x, n);
+        re._LEN += n;
         return re;
     }
     //连接操作
     string operator + (const string &x){
         string re = *this;
+        if(x._LEN == 0){
+            return re;
+        }
         size_t n = x._LEN;
         if(re._LEN + n > re._CAP){
             re.flash_vessel(re._LEN + n - re._CAP);
         }
-        for(size_t i = 0; i < n; ++i){
-            re.a[re._LEN] = x.a[i];
-            if(re.a[re._LEN] == '\0'){
-                break;
-            }
-            ++re._LEN;
-        }
+        memcpy(re.a + _LEN, x.a, n);
+        re._LEN += n;
         return re;
     }
 
@@ -149,9 +133,11 @@ public:
     }
     //赋值or初始化操作
     void operator = (const string &x){
-        this->a = x.a;
+        if(x._CAP > this->_CAP){
+            this->flash_vessel(x._CAP - this->_CAP);
+        }
+        memcpy(this->a, x.a, x._LEN);
         this->_LEN = x._LEN;
-        this->_CAP = x._CAP;
         return ;
     }
 
@@ -188,6 +174,12 @@ private:
         _CAP += klen;
     }
 
+    //初始化
+    void init(){
+        _LEN = 0;
+        _CAP = 20;
+        a = new char[_CAP];
+    }
 };
 
 std::istream & operator >> (std::istream &in, string &x){
