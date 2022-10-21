@@ -34,13 +34,15 @@ public:
         vals = new T[_CAP];
     }
     stack(const stack &x){
-        _LEN = x._LEN;
-        _CAP = x._CAP;
-        vals = x.vals;
+        while(x._CAP > this->_CAP){
+            this->flash_vessel();
+        }
+        memcpy(this->a, x.a, x._LEN);
+        this->_LEN = x._LEN;
     }
-    /*~stack(){
+    ~stack(){
         delete []vals;
-    }*/
+    }
 
     //元素入栈
     void push(T v){
