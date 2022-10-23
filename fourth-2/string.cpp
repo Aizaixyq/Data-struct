@@ -30,9 +30,9 @@ int main(){
     string S = "12345abcdef";
     cout<< S <<endl;
     test1(S, '1', '0');
-    cout<<S<<endl;
+    cout<<"T1:"<<S<<endl;
     test2(S);
-    cout<<S<<endl;
+    cout<<"T2:"<<S<<endl;
     test3(S, '0');
-    cout<<S<<endl;
+    cout<<"T3:"<<S<<endl;
 }
