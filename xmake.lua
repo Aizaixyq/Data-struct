@@ -3,6 +3,7 @@ add_includedirs("first")
 add_includedirs("third")
 add_includedirs("fourth")
 add_includedirs("fourth-2")
+add_includedirs("fifth")
 if is_mode("debug")then
     add_cxxflags("-g")
 end
@@ -52,3 +53,8 @@ target("fourth-2")
     set_kind("binary")
     set_languages("cxx17")
     add_files("fourth-2/string.cpp")
+
+target("fifth")
+    set_kind("binary")
+    set_languages("cxx17")
+    add_files("fifth/sparse_martix.cpp")

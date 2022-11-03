@@ -2,6 +2,7 @@
 #include<ostream>
 #include<cstring>
 #include"iter.hpp"
+#include"allocator.hpp"
 #ifndef STRING_H_O
 #define STRING_H_O 1
 
@@ -62,7 +63,7 @@ public:
         string re = *this;
         re.a[re._LEN] = x;
         if(re._LEN > re._CAP - 1){
-            re.flash_vessel(3);
+            re.a = al.expend(re.a, _CAP, 3);
         }
         re.a[++re._LEN] = '\0';
         return re;
@@ -76,7 +77,7 @@ public:
         }
         size_t n = len;
         if(re._LEN + n > re._CAP){
-            re.flash_vessel(re._LEN + n - re._CAP);
+            re.a = al.expend(re.a, _CAP, re._LEN + n - re._CAP);
         }
         memcpy(re.a + _LEN, x, n);
         re._LEN += n;
@@ -90,7 +91,7 @@ public:
         }
         size_t n = x._LEN;
         if(re._LEN + n > re._CAP){
-            re.flash_vessel(re._LEN + n - re._CAP);
+            re.a = al.expend(re.a, _CAP, re._LEN + n - re._CAP);
         }
         memcpy(re.a + _LEN, x.a, n);
         re._LEN += n;
@@ -134,7 +135,7 @@ public:
     //赋值or初始化操作
     void operator = (const string &x){
         if(x._CAP > this->_CAP){
-            this->flash_vessel(x._CAP - this->_CAP);
+            this->a = al.expend(this->a, _CAP, x._CAP - this->_CAP);
         }
         memcpy(this->a, x.a, x._LEN);
         this->_LEN = x._LEN;
@@ -162,6 +163,7 @@ private:
     char *a;
     size_t _CAP;//容量
     size_t _LEN;//当前字符串长度
+    Allocator<char> al;
 
 
     //对字符串内存进行扩大
