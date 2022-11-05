@@ -1,29 +1,26 @@
-#include<iostream>
-#include<string>
-#include"stack.hpp"
+#include "stack.hpp"
+#include <iostream>
+#include <string>
 using std::cin;
 using std::string;
 
-bool is_num(char a){
-    if(a >= '0' && a <= '9'){
+bool is_num(char a) {
+    if (a >= '0' && a <= '9') {
         return true;
-    }
-    else{
+    } else {
         return false;
     }
 }
 
-
-int main(){
+int main() {
     string ip;
-    cin>>ip;
+    cin >> ip;
     stack<int> num;
     stack<char> sym;
-    for(auto i:ip){
-        if(is_num(i)){
+    for (auto i : ip) {
+        if (is_num(i)) {
             num.push(i - '0');
-        }
-        else{
+        } else {
             sym.push(i);
         }
     }

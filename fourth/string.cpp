@@ -1,26 +1,26 @@
-#include<iostream>
-#include"string.hpp"
+#include "string.hpp"
+#include <iostream>
 
-using std::cout;
 using std::cin;
+using std::cout;
 
-void test(){
+void test() {
     string a = "abc1234567890123456";
     a[-1] = 'a';
     a += "av";
     string b;
-    cin>>b;
+    cin >> b;
     b += a;
-    cout<<b<<std::endl;
+    cout << b << std::endl;
     a = "acc";
-    cout<<a;
+    cout << a;
 }
 
-int main(){
-    string a,b;
-    cin>>a>>b;
-    cout<<a<<std::endl;
-    cout<<b<<std::endl;
+int main() {
+    string a, b;
+    cin >> a >> b;
+    cout << a << std::endl;
+    cout << b << std::endl;
     string c = a + b;
-    cout<<c;
+    cout << c;
 }
