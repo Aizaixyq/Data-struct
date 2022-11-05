@@ -19,7 +19,8 @@ struct triple {
 class sm {
 private:
     triple *elem = nullptr;
-    size_t _n = 0, _m = 0;
+    size_t _n = 0;
+    size_t _m = 0;
     size_t _CAP = 10;
     size_t _LEN = 0;
     Allocator<triple> alloc;
@@ -29,8 +30,6 @@ public:
     sm(int n, int m) {
         this->_n = n;
         this->_m = m;
-        this->_CAP = 10;
-        this->_LEN = 0;
         this->elem = alloc.allocator(_CAP);
     }
     /**
