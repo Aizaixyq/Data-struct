@@ -3,7 +3,8 @@
 #ifndef STACK_H
 #define STACK_H 1
 
-template <class T> class stack {
+template <class T>
+class stack {
 private:
     T *vals;
     size_t _LEN;

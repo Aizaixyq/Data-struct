@@ -15,7 +15,8 @@ public:
         init();
         *this = x;
     }
-    template <size_t len> string(const char (&x)[len]) {
+    template <size_t len>
+    string(const char (&x)[len]) {
         init();
         *this = x;
     }
@@ -57,7 +58,8 @@ public:
         return re;
     }
     //连接操作
-    template <size_t len> string operator+(const char (&x)[len]) {
+    template <size_t len>
+    string operator+(const char (&x)[len]) {
         string re = *this;
         if (x == NULL) {
             return re;
@@ -91,7 +93,8 @@ public:
         return;
     }
     //连接操作
-    template <size_t len> void operator+=(const char (&x)[len]) {
+    template <size_t len>
+    void operator+=(const char (&x)[len]) {
         *this = this->operator+(x);
         return;
     }
@@ -109,7 +112,8 @@ public:
         return;
     }
     //赋值or初始化操作
-    template <size_t len> void operator=(const char (&x)[len]) {
+    template <size_t len>
+    void operator=(const char (&x)[len]) {
         this->_LEN = 0;
         this->a[0] = '\0';
         this->operator+=(x);

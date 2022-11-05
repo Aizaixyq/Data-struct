@@ -2,7 +2,8 @@
 #ifndef ALLOCATOR_H_O
 #define ALLOCATOR_H_O
 
-template <typename T> class Allocator {
+template <typename T>
+class Allocator {
     typedef unsigned long long size_t;
 
 public:

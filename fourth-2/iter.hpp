@@ -1,7 +1,8 @@
 #ifndef ITER_H
 #define ITER_H 1
 
-template <typename T> class iter {
+template <typename T>
+class iter {
 private:
     T *_vals;
 
